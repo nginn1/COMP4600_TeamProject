@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyTech</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1 class="logo">EASYTECH</h1>
+
+            <!-- Login Link -->
+            <a href="login.html" class="login-link">Login</a>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="tutorialdeviceselect.html">Tutorials</a></li>
+            <li><a href="createtutorials.html">Create Tutorials</a></li>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="userguidelines.html">User Guidelines</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="account.html">Account</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content: Create Tutorial Form -->
+    <main class="tutorial-container">
+        <section class="tutorial-box">
+            <h2>Create Your Tutorial</h2>
+			<form action="tutorialcreationsuccess.html">
+
+            <!-- Tutorial Creation Form -->
+            <form id="tutorial-form">
+                <!-- Title -->
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter tutorial title" required>
+
+                <!-- Device Type -->
+                <label for="deviceType">Device Type:</label>
+                <input type="text" id="deviceType" name="deviceType" placeholder="Enter device type" required>
+
+                <!-- Key Function -->
+                <label for="keyFunction">Key Function (Camera, Email, Appstore, etc.):</label>
+                <input type="text" id="keyFunction" name="keyFunction" placeholder="Enter key function" required>
+
+                <!-- Main Text -->
+                <label for="mainText">Main Text:</label>
+                <textarea id="mainText" name="mainText" rows="5" placeholder="Enter the main content for the tutorial" required></textarea>
+
+                <!-- Submit Button -->
+                <button type="submit">Create Tutorial</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Nathan Ginn. All rights reserved.</p>
+    </footer>
+
+    <!-- Link to JavaScript File -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+
+
