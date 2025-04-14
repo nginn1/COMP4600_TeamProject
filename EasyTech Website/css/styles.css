@@ -244,4 +244,63 @@ button {
 button:hover {
     background-color: #555;
 }
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 20px 0;
+}
 
+.tutorial-card {
+    display: block;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    min-width: 180px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-content span {
+    font-size: 2rem;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #007bff;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.selection-prompt {
+    text-align: center;
+    margin-top: 15px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+main {
+    padding: 150px 20px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
