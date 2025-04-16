@@ -304,3 +304,61 @@ main {
     margin: 20px auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+#text-controls {
+    margin-top: 15px;
+}
+
+#text-controls button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.highlighted-resizable {
+    /* Font size will be dynamically applied here */
+}
+/* ... other CSS rules ... */
+
+#text-control-container {
+    position: sticky; /* Or fixed if you want it always visible in the viewport */
+    top: 10px; /* Adjust as needed */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background to make it stand out */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Ensure it's above other content */
+    text-align: right; /* Align buttons to the right */
+    margin-bottom: 20px; /* Add some space below */
+}
+
+#text-control-container span {
+    margin-right: 10px;
+}
+
+#text-control-container button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+main section {
+    position: relative; /* For positioning the controls */
+}
+
+main section .text-size-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+main section .text-size-controls span {
+    margin-right: 5px;
+}
+
+main section .text-size-controls button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
