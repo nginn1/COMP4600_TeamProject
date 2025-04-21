@@ -32,16 +32,24 @@
     </nav>
 
     <main>
-        <section>
-
-            <h2>Account</h2>
-            <p>This is where you manage your account.</p>
-			<li>
-				<a href="forgotpassword.html">Reset Password</a>
-			</li>
-			<li>
-				<a href="register.html">Register</a>
-			</li>
+        <section style="position: relative;">
+            <div class="text-size-controls">
+                <span>Text Size:</span>
+                <button id="increase-text">+</button>
+                <button id="decrease-text">-</button>
+            </div>
+            <div class="resizable-text">
+                <h2>Account</h2>
+                <p>This is where you manage your account.</p>
+                <ul>
+                    <li>
+                        <a href="forgotpassword.html">Reset Password</a>
+                    </li>
+                    <li>
+                        <a href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
         </section>
     </main>
 
@@ -81,7 +89,7 @@
                     let currentSize = parseFloat(window.getComputedStyle(span).fontSize) / parseFloat(getComputedStyle(document.documentElement).fontSize) || 1;
                     let newSize = currentSize + delta;
 
-                    if (newSize >= minFontSize && newFontSize <= maxFontSize) {
+                    if (newSize >= minFontSize && newSize <= maxFontSize) {
                         span.style.fontSize = newSize + 'em';
                     }
                 } else if (range.startContainer.nodeType === Node.ELEMENT_NODE && range.startContainer.classList.contains(highlightedClass)) {
