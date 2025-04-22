@@ -7,6 +7,26 @@
     <title>EasyTech</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+
+    .text-size-controls-wrapper {
+        position: absolute;
+        top: 110px; /* Adjust this value if needed */
+        right: 20px; /* Adjust this value if needed */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        z-index: 100;
+        /* Remove float: right; */
+        width: auto; /* Adjust width to fit content */
+    }
+    
+    main.login-container {
+        position: relative; /* This is crucial */
+        padding-top: 40px; /* Adjust if needed to avoid overlap */
+        /* Remove any text-align: right; */
+    }
+    </style>
 
 <body>
 
@@ -35,6 +55,11 @@
 
     <!-- Main Content -->
     <main>
+        <div class="text-size-controls-wrapper">
+            <span>Text Size:</span>
+            <button id="increase-text">+</button>
+            <button id="decrease-text">-</button>
+        </div>
         <section>
             <h2>Tutorial created succesfully!</h2>
 			<a href="index.html"> < Back to home </a>
@@ -45,6 +70,62 @@
     <footer>
         <p>&copy; 2025 Nathan Ginn. All rights reserved.</p>
     </footer>
+    <script>
+        const increaseButton = document.getElementById('increase-text');
+        const decreaseButton = document.getElementById('decrease-text');
+        // We don't need to target a specific resizable-text container on this page
+        const step = 0.1;
+        const minFontSize = 0.5;
+        const maxFontSize = 2.0;
+        const highlightedClass = 'highlighted-resizable';
+
+        function applyFontSizeChange(delta) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) {
+                return; // No text selected
+            }
+
+            const ranges = [];
+            for (let i = 0; i < selection.rangeCount; i++) {
+                ranges.push(selection.getRangeAt(i));
+            }
+
+            ranges.forEach(range => {
+                const selectedText = range.extractContents();
+                if (selectedText.textContent.trim() !== "") {
+                    const span = document.createElement('span');
+                    span.classList.add(highlightedClass);
+                    span.appendChild(selectedText);
+                    range.insertNode(span);
+
+                    // Get the current font size of the newly created span
+                    let currentSize = parseFloat(window.getComputedStyle(span).fontSize) / parseFloat(getComputedStyle(document.documentElement).fontSize) || 1;
+                    let newSize = currentSize + delta;
+
+                    if (newSize >= minFontSize && newSize <= maxFontSize) {
+                        span.style.fontSize = newSize + 'em';
+                    }
+                } else if (range.startContainer.nodeType === Node.ELEMENT_NODE && range.startContainer.classList.contains(highlightedClass)) {
+                    // Handle resizing of already highlighted spans
+                    const highlightedSpan = range.startContainer;
+                    let currentSize = parseFloat(window.getComputedStyle(highlightedSpan).fontSize) / parseFloat(getComputedStyle(document.documentElement).fontSize) || 1;
+                    let newSize = currentSize + delta;
+
+                    if (newSize >= minFontSize && newSize <= maxFontSize) {
+                        highlightedSpan.style.fontSize = newSize + 'em';
+                    }
+                }
+            });
+        }
+
+        increaseButton.addEventListener('click', () => {
+            applyFontSizeChange(step);
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            applyFontSizeChange(-step);
+        });
+    </script>
 
 </body>
 

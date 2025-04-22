@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyTech</title>
     <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -62,7 +63,7 @@
     <script>
         const increaseButton = document.getElementById('increase-text');
         const decreaseButton = document.getElementById('decrease-text');
-        const resizableTextContainer = document.querySelector('.resizable-text');
+        const resizableTextContainer = document.querySelectorAll('.resizable-text'); // Select all resizable containers
         const step = 0.1;
         const minFontSize = 0.5;
         const maxFontSize = 2.0;
@@ -119,4 +120,3 @@
 </body>
 
 </html>
-
