@@ -7,20 +7,43 @@
     <title>EasyTech</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .text-size-controls-wrapper {
+    position: absolute;
+    top: 10px;         /* Adjust vertical position from the top */
+    right: 20px;       /* Adjust horizontal position from the right */
+    display: flex;
+    align-items: center; /* Align label and buttons horizontally */
+    gap: 10px;          /* Space between label and buttons */
+    z-index: 100;      /* Ensure it's above other elements within the main container */
+}
+
+.text-size-controls-wrapper span {
+    /* Adjust styling for the label if needed */
+}
+
+.text-size-controls-wrapper button {
+    padding: 8px 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+main.tutorial-container {
+    position: relative; 
+    padding-top: 40px; 
+}
+</style>
 
 <body>
 
-    <!-- Header Section -->
     <header>
         <div class="container">
             <h1 class="logo">EASYTECH</h1>
 
-            <!-- Login Link -->
             <a href="login.html" class="login-link">Login</a>
         </div>
     </header>
 
-    <!-- Navigation Bar -->
     <nav>
         <ul class="navbar">
             <li><a href="index.html">Home</a></li>
@@ -33,45 +56,95 @@
         </ul>
     </nav>
 
-    <!-- Main Content: Create Tutorial Form -->
     <main class="tutorial-container">
+        <div class="text-size-controls-wrapper">
+            <span>Text Size:</span>
+            <button id="increase-text">+</button>
+            <button id="decrease-text">-</button>
+        </div>
         <section class="tutorial-box">
             <h2>Create Your Tutorial</h2>
-			<form action="tutorialcreationsuccess.html">
+            <form action="tutorialcreationsuccess.html">
 
-            <!-- Tutorial Creation Form -->
-            <form id="tutorial-form">
-                <!-- Title -->
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" placeholder="Enter tutorial title" required>
+                <form id="tutorial-form">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter tutorial title" required>
 
-                <!-- Device Type -->
-                <label for="deviceType">Device Type:</label>
-                <input type="text" id="deviceType" name="deviceType" placeholder="Enter device type" required>
+                    <label for="deviceType">Device Type:</label>
+                    <input type="text" id="deviceType" name="deviceType" placeholder="Enter device type" required>
 
-                <!-- Key Function -->
-                <label for="keyFunction">Key Function (Camera, Email, Appstore, etc.):</label>
-                <input type="text" id="keyFunction" name="keyFunction" placeholder="Enter key function" required>
+                    <label for="keyFunction">Key Function (Camera, Email, Appstore, etc.):</label>
+                    <input type="text" id="keyFunction" name="keyFunction" placeholder="Enter key function" required>
 
-                <!-- Main Text -->
-                <label for="mainText">Main Text:</label>
-                <textarea id="mainText" name="mainText" rows="5" placeholder="Enter the main content for the tutorial" required></textarea>
+                    <label for="mainText">Main Text:</label>
+                    <textarea id="mainText" name="mainText" rows="5" placeholder="Enter the main content for the tutorial"
+                        required></textarea>
 
-                <!-- Submit Button -->
-                <button type="submit">Create Tutorial</button>
-            </form>
+                    <button type="submit">Create Tutorial</button>
+                </form>
         </section>
     </main>
 
-    <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 Nathan Ginn. All rights reserved.</p>
     </footer>
 
-    <!-- Link to JavaScript File -->
-    <script src="js/script.js"></script>
+    <script>
+        const increaseButton = document.getElementById('increase-text');
+        const decreaseButton = document.getElementById('decrease-text');
+        // We don't need to target a specific resizable-text container on this page
+        const step = 0.1;
+        const minFontSize = 0.5;
+        const maxFontSize = 2.0;
+        const highlightedClass = 'highlighted-resizable';
+
+        function applyFontSizeChange(delta) {
+            const selection = window.getSelection();
+            if (!selection || selection.rangeCount === 0) {
+                return; // No text selected
+            }
+
+            const ranges = [];
+            for (let i = 0; i < selection.rangeCount; i++) {
+                ranges.push(selection.getRangeAt(i));
+            }
+
+            ranges.forEach(range => {
+                const selectedText = range.extractContents();
+                if (selectedText.textContent.trim() !== "") {
+                    const span = document.createElement('span');
+                    span.classList.add(highlightedClass);
+                    span.appendChild(selectedText);
+                    range.insertNode(span);
+
+                    // Get the current font size of the newly created span
+                    let currentSize = parseFloat(window.getComputedStyle(span).fontSize) / parseFloat(getComputedStyle(document.documentElement).fontSize) || 1;
+                    let newSize = currentSize + delta;
+
+                    if (newSize >= minFontSize && newSize <= maxFontSize) {
+                        span.style.fontSize = newSize + 'em';
+                    }
+                } else if (range.startContainer.nodeType === Node.ELEMENT_NODE && range.startContainer.classList.contains(highlightedClass)) {
+                    // Handle resizing of already highlighted spans
+                    const highlightedSpan = range.startContainer;
+                    let currentSize = parseFloat(window.getComputedStyle(highlightedSpan).fontSize) / parseFloat(getComputedStyle(document.documentElement).fontSize) || 1;
+                    let newSize = currentSize + delta;
+
+                    if (newSize >= minFontSize && newSize <= maxFontSize) {
+                        highlightedSpan.style.fontSize = newSize + 'em';
+                    }
+                }
+            });
+        }
+
+        increaseButton.addEventListener('click', () => {
+            applyFontSizeChange(step);
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            applyFontSizeChange(-step);
+        });
+    </script>
 </body>
 
 </html>
-
-
